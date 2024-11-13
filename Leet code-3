@@ -1,0 +1,54 @@
+1.To push the elements to stack and print -1 if duplicates are found.
+
+#define MAX 100
+char stack[MAX];
+int top=-1;
+void push(char x)
+{
+  if(top==MAX-1)
+    printf("STack is full");
+  else{
+    top++;
+    stack[top]=x;
+  }}  
+char pop()
+{
+
+     return stack[--top]; } 
+bool backspaceCompare(char* s, char* t) {
+    while(*s!='\0')
+    {
+        if(*s=='#')
+          pop();
+        else
+          push(*s);  
+        s++;  
+    }
+     while(*t!='\0')
+    {
+        if(*t=='#')
+          pop();
+        else
+          push(*t);  
+        t++;  
+    }
+    char st[MAX];
+    for(int i=0;i<top;i++)
+    {
+        st[i]=pop();
+    }
+
+    char st1[MAX];
+    for(int i=0;i<top;i++)
+    {
+        st1[i]=pop();
+    }
+    while(*st!='\0' && *st1!='\0')
+      {
+        if(*st==*st1)
+          return 1;
+        else
+         return 0; 
+         
+      }
+      }
