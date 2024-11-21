@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node* next;
+};
+
+void push(struct node**head,int data){
+    struct node* obj=(struct node*)malloc(sizeof(struct node));
+    obj->data=data;
+    obj->next=*head;
+    *head=obj;
+}
+
+void pop(struct node* *head){
+    struct node* ptr=(struct node*)malloc(sizeof(struct node));
+    struct node* prev=ptr;
+    ptr=*head;
+    if(*head==NULL){
+        printf("empty list!!");
+    }
+    while(ptr->next!=NULL){
+      prev=ptr;
+      ptr=ptr->next;}
+      prev->next=NULL;
+      free(ptr);
+}
+
+ void display(struct node**head){
+     struct node* ptr=*head;
+     while(ptr!=NULL){
+        printf("%d\t",ptr->data);
+        ptr=ptr->next;
+     }
+ }
+
+ void main(){
+  struct node*head=NULL;
+  push(&head,1);
+  push(&head,2);
+  push(&head,3);
+  push(&head,4);
+  push(&head,5);
+  printf("queue is:\n");
+  display(&head);
+  printf("\n");
+  pop(&head);
+  printf("queue after deletion is:\n");
+  display(&head);
+}
