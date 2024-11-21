@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+  int data;
+  struct node* next;
+};
+
+
+void push(struct node** head, int new_data)
+{
+struct node* new_node = (struct node*) malloc(sizeof(struct node));
+new_node->data = new_data;
+new_node->next = (*head);
+(*head) = new_node;
+}
+
+
+void Pop(struct node**head)
+{
+struct node *ptr;
+if(*head == NULL)
+{
+printf("\nList is empty");
+}
+else
+{
+ptr = *head;
+*head = ptr->next;
+free(ptr);
+}
+}
+
+ void display(struct node**head){
+     struct node* ptr=*head;
+     while(ptr!=NULL){
+        printf("%d\t",ptr->data);
+        ptr=ptr->next;
+     }
+ }
+
+void main(){
+  struct node*head=NULL;
+  push(&head,1);
+  push(&head,2);
+  push(&head,3);
+  push(&head,4);
+  push(&head,5);
+  printf("stack is:\n");
+  display(&head);
+  printf("\n");
+  Pop(&head);
+  printf("stack after deletion is:\n");
+  display(&head);
+}
