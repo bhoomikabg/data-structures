@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node*next;
+ };
+
+ struct node*head=NULL;
+
+ void insert(int x){
+     struct node* obj=(struct node*)malloc(sizeof(struct node));
+     obj->data=x;
+     obj->next=head;
+     head=obj;
+ }
+
+ void sort(){
+     if(head==NULL)
+        printf("Empty list.\n");
+     struct node* ptr=head;
+     struct node* ptr1;
+     int temp;
+     for(ptr=head;ptr!=NULL;ptr=ptr->next)
+     {
+         for(ptr1=ptr->next;ptr1!=NULL;ptr1=ptr1->next)
+         {
+             if(ptr->data>ptr1->data)
+             {
+                 temp=ptr->data;
+                 ptr->data=ptr1->data;
+                 ptr1->data=temp;
+             }
+         }
+     }
+
+ }
+
+ void reverse()
+ {
+     struct node* ptr=head;
+     struct node* prev=NULL;
+     struct node* next=NULL;
+     while(ptr!=NULL){
+        next=ptr->next;
+        ptr->next=prev;
+        prev=ptr;
+        ptr=next;
+     }
+     head=prev;
+ }
+
+  struct node*head1=NULL;
+
+ void insert1(int x){
+     struct node* obj=(struct node*)malloc(sizeof(struct node));
+     obj->data=x;
+     obj->next=head1;
+     head1=obj;
+ }
+
+ void concat(struct node* head,struct node* head1){
+
+   if(head!=NULL && head1!=NULL){
+    if(head->next==NULL)
+        head->next=head1;
+    else
+        concat(head->next,head1);
+   }
+   else
+    printf("Both lists are empty!!\n");
+ }
+
+ void display(){
+     struct node* ptr=head;
+     while(ptr!=NULL){
+        printf("%d\t",ptr->data);
+        ptr=ptr->next;
+     }
+ }
+ void main(){
+     insert(16);
+     insert(1);
+     insert(32);
+     insert(4);
+     insert(10);
+     insert1(50);
+     insert1(19);
+     insert1(4);
+     insert1(6);
+     insert1(12);
+     printf("1st list is:\n");
+     display();
+     printf("\n");
+     sort();
+     printf("Sorted list is:\n");
+     display();
+     printf("\n");
+     reverse();
+     printf("Reversed list is:\n");
+     display();
+     printf("\n");
+     concat(head,head1);
+     printf("Concatenated list is:\n");
+     display();
+ }
