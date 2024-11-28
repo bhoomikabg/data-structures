@@ -1,0 +1,112 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    struct node* prev;
+    int data;
+    struct node* next;
+};
+
+void insertatLeft(struct node**head,int val){
+    struct node* obj1=(struct node*)malloc(sizeof(struct node));
+    struct node* ptr;
+    ptr=*head;
+    obj1->data=val;
+    int i;
+    printf("Enter value whose left the node to be inserted:\n");
+    scanf("%d",&i);
+    while(ptr->data!=i){
+        ptr=ptr->next;
+    }
+    if(ptr==*head){
+        ptr->prev=obj1;
+        obj1->prev=NULL;
+        obj1->next=ptr;
+        *head=obj1;
+    }
+    else{
+        obj1->prev=ptr->prev;
+        obj1->next=ptr;
+        ptr->prev=obj1;
+        ptr->prev->next=obj1;
+    }
+}
+void insert(struct node**head,int x){
+    struct node* obj=(struct node*)malloc(sizeof(struct node));
+    if(*head==NULL)
+    {
+        obj->data=x;
+        obj->prev=NULL;
+        obj->next=NULL;
+        *head=obj;
+    }
+    else{
+        obj->data=x;
+        obj->next=*head;
+        obj->prev=NULL;
+        (*head)->prev=obj;
+        *head=obj;
+    }
+}
+
+int i=0,flag;
+void deleteatval(struct node**head){
+    if(*head==NULL)
+        printf("Empty list ");
+    else{
+    struct node* ptr=*head;
+    int x;
+    printf("Enter value to be deleted:");
+    scanf("%d",&x);
+
+    while(ptr->data!=x){
+      ptr=ptr->next;
+      i++;
+    }
+    if(i==0){
+        printf("element not found");
+    }
+else{
+    if(ptr==*head){
+        ptr->next->prev=NULL;
+        *head=ptr->next;
+        free(ptr);
+    }
+    else if(ptr->next==NULL){
+        ptr->prev->next=NULL;
+        free(ptr);
+    }
+    else{
+    ptr->prev->next=ptr->next;
+    ptr->next->prev=ptr->prev;
+    free(ptr);}
+    printf("element %d deleted from position %d!!\n",x,(i+1));
+    }}
+
+    }
+
+
+
+void display(struct node**head){
+    struct node* ptr=*head;
+    printf("list is:\n");
+    while(ptr!=NULL){
+        printf("%d->",ptr->data);
+        ptr=ptr->next;}
+     printf("\n");
+}
+
+void main(){
+    struct node* head=NULL;
+    insert(&head,10);
+    insert(&head,9);
+    insert(&head,8);
+    insert(&head,7);
+    insert(&head,6);
+    insert(&head,5);
+    display(&head);
+    deleteatval(&head);
+    display(&head);
+    insertatLeft(&head,4);
+    display(&head);
+}
