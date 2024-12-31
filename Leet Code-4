@@ -1,0 +1,22 @@
+Backspace String Compare
+
+typedef struct node{
+char *st; int top; int capacity; } stack; stack* init(int capacity){
+struct node* node=(struct node*)malloc (sizeof(struct node)); node->top=-1;
+node->capacity=capacity; node -> st=(char*)malloc(capacity*sizeof(char)); return node; } void push(stack* node,char x ){
+if(node->top==node->capacity-1){ printf("stack is full"); return;} node->st[++node->top]=x;
+} char pop(stack * node){
+return node->st[node->top--];
+} bool backspaceCompare(char* s, char* t) {
+int capacity=50; stack * node=init(capacity); int r,i=0; while(*s!='\0'){
+if(*s=='#'){ char a; a=pop(node); } else push(node,*s); s++; } char arr1[capacity]; while(node->top>=0){
+arr1[i++]=pop(node);
+} free(node); stack * node1=init(capacity); while(*t!='\0'){
+if(*t=='#'){ char a; a=pop(node1); } else push(node1,*t); t++; } char arr2[capacity]; int j=0;
+while(node1->top>=0){
+arr2[j++]=pop(node1);
+} free(node1); for (int k=0;k<i;k++){
+if(arr1[k]==arr2[k]) r=1; else r=0;
+}
+ return;
+}
